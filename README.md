@@ -84,8 +84,15 @@ En `main` corre los tests y publica la imagen en GHCR (`:sha`, `:1.0.0` y
 la variable `DEPLOY_ENABLED` vale `true`. Las claves van en los secretos del
 repositorio: `AWS_ACCESS_KEY_ID` y `AWS_SECRET_ACCESS_KEY`.
 
-El paquete de GHCR tiene que ser público para que los nodos puedan bajar la
-imagen. Si se deja privado, hace falta un `imagePullSecret`.
+El paquete de GHCR queda privado. Antes de desplegar en EKS creo el secret
+en el clúster, sin guardarlo en el repositorio:
+
+```bash
+kubectl create secret docker-registry ghcr -n techwave \
+  --docker-server=ghcr.io \
+  --docker-username=USUARIO \
+  --docker-password=TOKEN
+```
 
 ## Secretos
 

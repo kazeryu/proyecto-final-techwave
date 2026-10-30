@@ -23,6 +23,8 @@ spec:
         runAsNonRoot: true
         runAsUser: 10001
         fsGroup: 10001
+      imagePullSecrets:
+        - name: ghcr
       containers:
         - name: app
           image: ghcr.io/kazeryu/proyecto-final-techwave:1.0.0
