@@ -40,10 +40,10 @@ module "vpc" {
   public_subnets  = ["10.40.1.0/24", "10.40.2.0/24"]
   private_subnets = ["10.40.11.0/24", "10.40.12.0/24"]
 
-  # Sin NAT: en un laboratorio el gateway (~32 USD/mes) no aporta a la defensa.
-  # Los nodos salen a internet por las subredes públicas. Para dejarlos en
-  # privadas, enable_nat_gateway = true y subnet_ids = module.vpc.private_subnets.
-  enable_nat_gateway = false
+  # Sin NAT. Los nodos salen por las subredes públicas, que tienen que
+  # asignar IP pública o el node group no arranca.
+  enable_nat_gateway     = false
+  map_public_ip_on_launch = true
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1"
@@ -63,7 +63,7 @@ module "eks" {
   version = "20.31.6"
 
   cluster_name    = "techwave"
-  # 1.32 ya no admite clústeres nuevos. 1.34 sigue en soporte estándar.
+  # 1.32 ya no deja crear clústeres nuevos. 1.34 sigue en soporte.
   cluster_version = "1.34"
 
   vpc_id     = module.vpc.vpc_id
