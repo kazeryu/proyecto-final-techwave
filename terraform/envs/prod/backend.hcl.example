@@ -1,0 +1,5 @@
+bucket         = "techwave-tfstate-917950986415"
+key            = "eks/terraform.tfstate"
+region         = "eu-west-1"
+dynamodb_table = "techwave-tfstate-lock"
+encrypt        = true

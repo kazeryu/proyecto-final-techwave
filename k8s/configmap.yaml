@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: techwave-config
+  namespace: techwave
+data:
+  COMPANY_NAME: TechWave Solutions
+  OTEL_SERVICE_NAME: techwave
+  # Sin collector no se exporta nada. En Compose apunta al servicio otel-collector.
+  OTEL_EXPORTER_OTLP_ENDPOINT: ""
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: techwave-release
+  namespace: techwave
+data:
+  active: blue
+  previous: blue

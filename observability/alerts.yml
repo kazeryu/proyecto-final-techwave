@@ -1,0 +1,17 @@
+groups:
+  - name: techwave
+    rules:
+      - alert: TechWaveCaida
+        expr: up{job="techwave"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: TechWave no responde al scrape de Prometheus
+      - alert: TechWaveErrores
+        expr: increase(techwave_http_requests_total{status="500"}[2m]) > 3
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: La aplicación está devolviendo errores 500

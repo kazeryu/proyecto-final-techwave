@@ -1,0 +1,9 @@
+route:
+  receiver: laboratorio
+  group_wait: 5s
+  group_interval: 30s
+  repeat_interval: 2m
+
+receivers:
+  # Sin destino externo. La alerta se mira en Prometheus y en Alertmanager.
+  - name: laboratorio

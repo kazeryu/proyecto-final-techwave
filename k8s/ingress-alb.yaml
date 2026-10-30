@@ -1,0 +1,22 @@
+# Pide un balanceador en EKS. Hace falta el AWS Load Balancer Controller.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: techwave-alb
+  namespace: techwave
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: techwave
+                port:
+                  name: http
